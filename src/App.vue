@@ -1,5 +1,8 @@
 <template>
-  <HomePage msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <HomePage />
+  </div>
+
 </template>
 
 <script>
@@ -13,13 +16,29 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  height: 100%;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 </style>
