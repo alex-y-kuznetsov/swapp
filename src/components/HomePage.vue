@@ -1,12 +1,27 @@
 <template>
-  <header class="page-header">swApp</header>
-  <main class="page-main">Main</main>
-  <footer class="page-footer">Footer</footer>
+  <header class="page-header">
+    <SwappHeader />
+  </header>
+  <main class="page-main">
+    <SwappMain />
+  </main>
+  <footer class="page-footer">
+    <SwappFooter />
+  </footer>
 </template>
 
 <script>
+import SwappHeader from '@/components/SwappHeader.vue';
+import SwappMain from '@/components/SwappMain.vue';
+import SwappFooter from '@/components/SwappFooter.vue';
+
 export default {
   name: 'HomePage',
+  components: {
+    SwappHeader,
+    SwappMain,
+    SwappFooter
+  }
 }
 </script>
 
