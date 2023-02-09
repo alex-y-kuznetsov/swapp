@@ -19,6 +19,13 @@ export default {
 <style lang="less">
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap');
 
+:root {
+    --color-main: #000000;
+    --color-secondary: #777777;
+    --color-focus: #903075;
+    --main-transition: 0.2s;
+}
+
 html,
 body {
   margin: 0;

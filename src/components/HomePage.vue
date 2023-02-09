@@ -32,6 +32,7 @@ export default {
 
   .page-main {
     padding: 20px 0;
+    overflow: auto;
   }
 
   .page-footer {

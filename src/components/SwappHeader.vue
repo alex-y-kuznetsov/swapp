@@ -10,7 +10,7 @@ export default {
 
 <style lang="less" scoped>
   .logo {
-    border: 2px solid;
+    border: 2px solid var(--color-main);
     border-radius: 6px;
     width: fit-content;
     padding: 4px 6px 5px 6px;
