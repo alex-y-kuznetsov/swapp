@@ -1,0 +1,75 @@
+<template>
+  <div class="modal-container">
+    <template v-if="this.$store.getters.openModal">
+
+      <div class="modal-wrap">
+
+        <div class="modal-overlay" @click="modalClose"></div>
+
+        <div class="modal-content">
+          <button class="modal-close" @click="modalClose">X</button>
+          <component :is="this.$store.getters.openModal"></component>
+        </div>
+      </div>
+
+    </template>
+  </div>
+</template>
+
+<script>
+import CreateEditModal from '@/components/modals/CreateEditModal.vue';
+
+export default {
+  name: 'ModalContainer',
+  components: {
+    CreateEditModal
+  },
+  methods: {
+    modalClose() {
+      this.$store.commit('closeModal');
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+  .modal-wrap {
+    position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      display: grid;
+      align-items: center;
+      box-sizing: border-box;
+      overflow-y: auto;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background: rgba(15,40,68,.7);
+    pointer-events: auto;
+  }
+
+  .modal-content {
+    background: #fff;
+    box-shadow: 0 0 4px rgb(0 0 0 / 10%), 0 4px 12px rgb(0 0 0 / 10%);
+    border-radius: 4px;
+    padding: 32px 24px;
+    margin: 24px 12px;
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+    position: relative;
+    z-index: 4;
+    max-width: 520px;
+    pointer-events: auto;
+    justify-self: center;
+  }
+</style>

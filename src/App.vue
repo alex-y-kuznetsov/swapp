@@ -2,16 +2,18 @@
   <div class="container">
     <HomePage />
   </div>
-
+<ModalContainer />
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue'
+import HomePage from './pages/HomePage.vue';
+import ModalContainer from './components/modals/ModalContainer.vue'
 
 export default {
   name: 'App',
   components: {
-    HomePage
+    HomePage,
+    ModalContainer
   }
 }
 </script>

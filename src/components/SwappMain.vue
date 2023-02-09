@@ -25,7 +25,7 @@
       <div class="swapp-input">Deck 2</div>
     </div>
     <div class=" swapp-item-controls">
-      <button class="swapp-item-button">edit</button>
+      <button class="swapp-item-button" @click="openEditModal">edit</button>
       <button class="swapp-item-button">del</button>
       <button class="swapp-item-button">top</button>
     </div>
@@ -36,6 +36,16 @@
 <script>
 export default {
   name: 'SwappMain',
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+    openEditModal() {
+      this.$store.commit('updateOpenModal', 'CreateEditModal');
+    }
+  }
 }
 </script>
 

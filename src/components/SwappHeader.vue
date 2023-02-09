@@ -1,5 +1,5 @@
 <template>
-  <div class="logo">swApp</div>
+  <div class="logo">{{  this.$store.getters.appName }}</div>
 </template>
 
 <script>
