@@ -1,7 +1,7 @@
 <template>
   <h1 class="modal-title">Create/edit a swap</h1>
 
-  <div class="form-container">
+  <div class="form-container" v-if="isInit">
     <div class="create-form">
       <label class="form-input-cover">
         <div class="form-input-legend">Deck in</div>
@@ -30,17 +30,29 @@
 </template>
 
 <script>
+import constants from '@/static/constants.js';
+
 export default {
   name: 'CreateEditModal',
   data() {
     return {
-
+      isInit: false,
+      cardNames: null
     }
   },
   methods: {
     submitForm() {
       console.log('submitted')
+    },
+    getCardNames() {
+      fetch(`${constants.API_URL}/catalog/card-names`)
+      .then(response => response.json())
+      .then(data => this.cardNames = data)
+      .then(() => this.isInit = true);
     }
+  },
+  mounted() {
+    this.getCardNames();
   }
 }
 </script>
