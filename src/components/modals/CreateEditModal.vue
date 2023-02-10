@@ -58,7 +58,7 @@ export default {
 
   .create-form {
     display: grid;
-    grid-template-columns: 46% 46%;
+    grid-template-columns: 48% 48%;
     gap: 20px 4%;
   }
 
@@ -97,7 +97,7 @@ export default {
     border: none;
     background-color: transparent;
     font-size: 16px;
-    padding: 4px 6px;
+    padding: 8px 10px;
     border: 1px solid var(--color-main);
     border-radius: 6px;
     cursor: pointer;

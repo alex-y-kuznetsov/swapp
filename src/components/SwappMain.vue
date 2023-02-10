@@ -1,9 +1,9 @@
 <template>
 
   <div class="swapp-item swapp-item-head">
-    <div>in</div>
-    <div class="swapp-item-mid">the swap</div>
-    <div>out</div>
+    <div>Deck in</div>
+    <div class="swapp-item-mid">The swap</div>
+    <div>Deck out</div>
     <div class=" swapp-item-controls"></div>
   </div>
 
@@ -25,9 +25,9 @@
       <div class="swapp-input">Deck 2</div>
     </div>
     <div class=" swapp-item-controls">
-      <button class="swapp-item-button" @click="openEditModal">edit</button>
-      <button class="swapp-item-button">del</button>
-      <button class="swapp-item-button">top</button>
+      <button class="swapp-item-button" @click="openEditModal">Edit</button>
+      <button class="swapp-item-button">Del</button>
+      <button class="swapp-item-button">Top</button>
     </div>
   </div> 
 
@@ -66,6 +66,10 @@ export default {
 
   .swapp-item-general {
     height: 120px;
+
+    & + & {
+      margin-top: 10px;
+    }
   }
 
   .swapp-input {
