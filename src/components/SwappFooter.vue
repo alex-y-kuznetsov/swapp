@@ -1,7 +1,9 @@
 <template>
   <div class="footer-cover">
     <div class="footer-controls">
-      <button class="footer-button">Clear all</button>
+      <button class="footer-button">Create</button>
+      <button class="footer-button">Help</button>
+      <button class="footer-button">Clear</button>
     </div>
     <div class="footer-copyright">{{  getYear() }}</div>
   </div>
@@ -27,15 +29,19 @@ export default {
   align-items: center;
 }
   .footer-button {
+    width: 66px;
     border: 2px solid var(--color-bg);
     color: var(--color-bg);
     border-radius: 6px;
-    width: fit-content;
     padding: 9px 10px 8px 10px;
     font-weight: 600;
     background-color: transparent;
     cursor: pointer;
     transition: all var(--main-transition);
+
+    & + & {
+      margin-left: 8px;
+    }
 
     &:hover {
       color: var(--color-white);
