@@ -73,11 +73,11 @@ export default {
     padding: 4px 0;
     font-size: 22px;
     border: none;
-    border-bottom: 1px solid var(--color-main);
+    border-bottom: 2px solid var(--color-main);
 
     &:focus {
       outline: none;
-      border-bottom: 1px solid var(--color-focus);
+      border-bottom: 2px solid var(--color-secondary);
     }
   }
 
@@ -88,6 +88,7 @@ export default {
 
   .modal-controls {
     display: flex;
+    justify-content: flex-end;
     gap: 6px;
 
   }
@@ -100,5 +101,11 @@ export default {
     border: 1px solid var(--color-main);
     border-radius: 6px;
     cursor: pointer;
+
+    &:hover {
+      color: var(--color-secondary);
+      border: 1px solid var(--color-secondary);
+      transition: all var(--main-transition);
+    }
   }
 </style>

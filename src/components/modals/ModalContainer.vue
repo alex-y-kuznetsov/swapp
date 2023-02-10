@@ -59,7 +59,7 @@ export default {
   }
 
   .modal-content {
-    background-color: var(--color-white);
+    background-color: var(--color-bg);
     box-shadow: var(--main-shadow);
     border-radius: 4px;
     padding: 32px 24px;
@@ -80,9 +80,16 @@ export default {
     border: none;
     background-color: transparent;
     cursor: pointer;
+    font-weight: 600;
+    border: 1px solid var(--color-main);
+    border-radius: 4px;
+    padding: 2px 4px 0px 4px;
+    transition: all var(--main-transition);
 
     &:hover {
-      color: var(--color-focus);
+      color: var(--color-secondary);
+      border: 1px solid var(--color-secondary);
+      transition: all var(--main-transition);
     }
   }
 </style>

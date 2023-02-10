@@ -51,10 +51,12 @@ export default {
 
 <stype lang="less" scoped>
   .swapp-item {
+    border-radius: 6px;
     padding: 10px;
     display: grid;
     grid-template-columns: 20% auto 20% 10%;
     gap: 10px;
+    background-color: var(--color-bg);
   }
 
   .swapp-item-head {
@@ -63,8 +65,6 @@ export default {
   }
 
   .swapp-item-general {
-    border: 1px solid var(--color-main);
-    border-radius: 6px;
     height: 120px;
   }
 
@@ -114,6 +114,7 @@ export default {
 
     img {
       height: 100%;
+      border-radius: 4px;
     }
   }
 
@@ -140,5 +141,14 @@ export default {
     height: 36px;
     width: 36px;
     cursor: pointer;
+    border: 1px solid var(--color-main);
+    border-radius: 4px;
+    transition: all var(--main-transition);
+
+    &:hover {
+      color: var(--color-secondary);
+      border: 1px solid var(--color-secondary);
+      transition: all var(--main-transition);
+    }
   }
 </stype>
