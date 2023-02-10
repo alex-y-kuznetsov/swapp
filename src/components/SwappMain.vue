@@ -72,7 +72,7 @@ export default {
     width: 100%;
     box-sizing: border-box;
     margin: 0;
-    padding: 4px;
+    padding: 4px 0;
     font-size: 22px;
     border: none;
     border-bottom: 1px solid var(--color-main);

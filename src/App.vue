@@ -22,10 +22,13 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
-    --color-main: #000000;
-    --color-secondary: #777777;
-    --color-focus: #903075;
-    --main-transition: 0.2s;
+  --color-white: #FFFFFF;
+  --color-main: #000000;
+  --color-secondary: #777777;
+  --color-focus: #903075;
+  --color-overlay: rgba(15,40,68,.4);
+  --main-transition: 0.2s;
+  --main-shadow: 0 0 4px rgb(0 0 0 / 10%), 0 4px 12px rgb(0 0 0 / 10%);
 }
 
 html,
@@ -40,6 +43,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
+}
+
+input {
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
 }
 
 .container {

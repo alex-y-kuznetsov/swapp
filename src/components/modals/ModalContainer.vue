@@ -54,13 +54,13 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 3;
-    background: rgba(15,40,68,.7);
+    background: var(--color-overlay);
     pointer-events: auto;
   }
 
   .modal-content {
-    background: #fff;
-    box-shadow: 0 0 4px rgb(0 0 0 / 10%), 0 4px 12px rgb(0 0 0 / 10%);
+    background-color: var(--color-white);
+    box-shadow: var(--main-shadow);
     border-radius: 4px;
     padding: 32px 24px;
     margin: 24px 12px;
@@ -71,5 +71,18 @@ export default {
     max-width: 520px;
     pointer-events: auto;
     justify-self: center;
+  }
+
+  .modal-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-focus);
+    }
   }
 </style>
