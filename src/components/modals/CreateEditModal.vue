@@ -51,6 +51,7 @@
 import VueMultiselect from 'vue-multiselect'
 import constants from '@/static/constants.js';
 import cloneObject from '@/helpers/cloneObject.js';
+import localStorage from '@/helpers/localStorage.js';
 
 export default {
   name: 'CreateEditModal',
@@ -82,11 +83,21 @@ export default {
       this.intForm = cloneObject(this.extForm);
     },
     getCardNames() {
-      fetch(`${constants.API_URL}/catalog/card-names`)
-      .then(response => response.json())
-      .then(json => this.cardNames = json.data)
-      .then(() => this.init());
+      if (localStorage.getLocalStorage('cardNames')) {
+        this.cardNames = localStorage.getLocalStorage('cardNames');
+        this.init();
+      } else {
+        const storageTime = 600000;
+        fetch(`${constants.API_URL}/catalog/card-names`)
+        .then(response => response.json())
+        .then(json => this.cardNames = json.data)
+        .then(() => {
+          localStorage.setLocalStorage('cardNames', this.cardNames, storageTime)
+          this.init();
+        });
+      }
     }
+      
   },
   mounted() {
     this.getCardNames();
