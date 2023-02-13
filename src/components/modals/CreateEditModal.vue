@@ -3,52 +3,89 @@
 
   <div class="form-container" v-if="isInit">
     <div class="create-form">
-      <label class="form-input-cover">
+
+      <div class="form-input-cover">
         <div class="form-input-legend">Deck in</div>
         <input type="text" class="form-input">
-      </label>
-      <label class="form-input-cover">
+      </div>
+
+      <div class="form-input-cover">
         <div class="form-input-legend">Deck out</div>
         <input type="text" class="form-input">
-      </label>
-      <label class="form-input-cover">
+      </div>
+
+      <div class="form-input-cover">
         <div class="form-input-legend">Card in</div>
-        <input type="text" class="form-input">
-      </label>
-      <label class="form-input-cover">
+        <VueMultiselect 
+          v-model="intForm.cardIn" 
+          :options="cardNames"
+          :close-on-select="true"
+          :clear-on-select="false"
+          :max-height="200"
+          placeholder=""
+        ></VueMultiselect>
+      </div>
+      
+      <div class="form-input-cover">
         <div class="form-input-legend">Card out</div>
-        <input type="text" class="form-input">
-      </label>
+        <VueMultiselect 
+          v-model="intForm.cardOut" 
+          :options="cardNames"
+          :close-on-select="true"
+          :clear-on-select="false"
+          :max-height="200"
+          placeholder=""
+        ></VueMultiselect>
+      </div>
     </div>
   </div>
 
   <div class="modal-controls">
     <button class="form-button">Submit</button>
-    <button class="form-button">Cancel</button>
+    <button class="form-button" @click="cancelChangesInForm">Cancel</button>
   </div>
 
 </template>
 
 <script>
+import VueMultiselect from 'vue-multiselect'
 import constants from '@/static/constants.js';
+import cloneObject from '@/helpers/cloneObject.js';
 
 export default {
   name: 'CreateEditModal',
+  components: {
+    VueMultiselect
+  },
   data() {
     return {
       isInit: false,
-      cardNames: null
+      cardNames: null,
+      extForm: {
+        deckIn: null,
+        deckOut: null,
+        cardIn: null,
+        cardOut: null
+      },
+      intForm: null
     }
   },
   methods: {
+    init() {
+      this.intForm = cloneObject(this.extForm);
+      this.isInit = true;
+    },
     submitForm() {
       console.log('submitted')
+    },
+    cancelChangesInForm() {
+      this.intForm = cloneObject(this.extForm);
     },
     getCardNames() {
       fetch(`${constants.API_URL}/catalog/card-names`)
       .then(response => response.json())
-      .then(data => this.cardNames = data)
-      .then(() => this.isInit = true);
+      .then(json => this.cardNames = json.data)
+      .then(() => this.init());
     }
   },
   mounted() {
@@ -57,6 +94,8 @@ export default {
 }
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
+<style src="@/static/multiselect_custom.less" lang="less"></style>
 <style lang="less" scoped>
   .modal-title {
     font-size: 22px;
@@ -68,14 +107,12 @@ export default {
     margin-bottom: 20px;
   }
 
-  .create-form {
-    display: grid;
-    grid-template-columns: 48% 48%;
-    gap: 20px 4%;
-  }
-
   .form-input-cover {
     box-sizing: border-box;
+
+    & + & {
+      margin-top: 30px;
+    }
   }
 
   .form-input {

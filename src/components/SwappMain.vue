@@ -137,7 +137,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
   }
 
   .swapp-item-button {

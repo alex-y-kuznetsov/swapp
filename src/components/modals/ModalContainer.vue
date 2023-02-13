@@ -83,7 +83,7 @@ export default {
     font-weight: 600;
     border: 1px solid var(--color-main);
     border-radius: 4px;
-    padding: 2px 4px 0px 4px;
+    padding: 2px 4px 1px 4px;
     transition: all var(--main-transition);
 
     &:hover {
