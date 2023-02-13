@@ -87,7 +87,7 @@ export default {
         this.cardNames = localStorage.getLocalStorage('cardNames');
         this.init();
       } else {
-        const storageTime = 600000;
+        const storageTime = 3600000;
         fetch(`${constants.API_URL}/catalog/card-names`)
         .then(response => response.json())
         .then(json => this.cardNames = json.data)
