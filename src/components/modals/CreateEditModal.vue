@@ -112,12 +112,36 @@ export default {
     generateSwappId() {
       return String(Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '');
     },
+    
     updateSwappItem() {
       if (!this.swappId) {
         this.swappId = this.generateSwappId();
       }
-      localStorage.setLocalStorage(this.swappId, this.intForm);
-      this.$store.commit('closeModal');
+
+      let objectForSend = {};
+      function getFullCardData(cardName, field) {
+        if(cardName) {
+          fetch(`${constants.API_URL}/cards/named?exact=${cardName}`)
+          .then(response => response.json())
+          .then((json) => {
+            objectForSend[field] = json;
+          })
+        } else {
+          objectForSend[field] = null;
+        }
+      }
+
+      let promises = [];
+      for (const key in this.intForm) {
+          promises.push(new Promise((resolve) => {
+          resolve(getFullCardData(this.intForm[key], key))
+        }))
+      }
+
+      Promise.all(promises).then(() => {
+        localStorage.setLocalStorage(this.swappId, objectForSend);
+        this.$store.commit('closeModal')
+      });
     }
   },
   mounted() {
