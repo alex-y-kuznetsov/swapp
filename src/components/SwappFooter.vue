@@ -1,7 +1,7 @@
 <template>
   <div class="footer-cover">
     <div class="footer-controls">
-      <button class="footer-button">Create</button>
+      <button class="footer-button" @click="openEditModal">Create</button>
       <button class="footer-button">Help</button>
       <button class="footer-button">Clear</button>
     </div>
@@ -13,6 +13,9 @@
 export default {
   name: 'SwappFooter',
   methods: {
+    openEditModal() {
+      this.$store.commit('updateOpenModal', { modalName: 'CreateEditModal' });
+    },
     getYear() {
       const today = new Date();
       return today.getFullYear();

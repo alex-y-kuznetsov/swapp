@@ -7,44 +7,65 @@
     <div class=" swapp-item-controls"></div>
   </div>
 
-  <div class="swapp-item swapp-item-general">
-    <div>
-      <div class="swapp-input">Deck 1</div>
-    </div>
-    <div class="swapp-item-mid">
-      <div class="swapp-item-mid-cover">
-        <div class="swapp-item-image swapp-item-image-left">
-          <img src="https://cdn1.mtggoldfish.com/images/gf/Island%2B%253C371%253E%2B%255B10E%255D.jpg">
-        </div>
-        <div class="swapp-item-image swapp-item-image-right">
-          <img src="https://cdn1.mtggoldfish.com/images/gf/Mountain%2B%253C376%253E%2B%255B10E%255D.jpg">
+  <template v-if="isInit">
+    <div class="swapp-item swapp-item-general">
+      <div>
+        <div class="swapp-input">Deck 1</div>
+      </div>
+      <div class="swapp-item-mid">
+        <div class="swapp-item-mid-cover">
+          <div class="swapp-item-image swapp-item-image-left">
+            <img src="https://cdn1.mtggoldfish.com/images/gf/Island%2B%253C371%253E%2B%255B10E%255D.jpg">
+          </div>
+          <div class="swapp-item-image swapp-item-image-right">
+            <img src="https://cdn1.mtggoldfish.com/images/gf/Mountain%2B%253C376%253E%2B%255B10E%255D.jpg">
+          </div>
         </div>
       </div>
-    </div>
-    <div>
-      <div class="swapp-input">Deck 2</div>
-    </div>
-    <div class=" swapp-item-controls">
-      <button class="swapp-item-button" @click="openEditModal">Edit</button>
-      <button class="swapp-item-button">Del</button>
-      <button class="swapp-item-button">Top</button>
-    </div>
-  </div> 
+      <div>
+        <div class="swapp-input">Deck 2</div>
+      </div>
+      <div class=" swapp-item-controls">
+        <button class="swapp-item-button" @click="openEditModal('123')">Edit</button>
+        <button class="swapp-item-button">Del</button>
+        <button class="swapp-item-button">Top</button>
+      </div>
+    </div> 
+  </template>
 
 </template>
 
 <script>
+import cloneObject from '@/helpers/cloneObject.js';
+
 export default {
   name: 'SwappMain',
   data() {
     return {
-
+      isInit: false,
+      swappList: []
     }
   },
   methods: {
-    openEditModal() {
-      this.$store.commit('updateOpenModal', 'CreateEditModal');
+    init() {
+      let tempList = cloneObject(localStorage);
+      delete tempList.cardNames;
+
+      for (const item in tempList) {
+        this.swappList.push({
+          id: item,
+          ...JSON.parse(tempList[item]).value
+        })
+      }
+
+      this.isInit = true;
+    },
+    openEditModal(id) {
+      this.$store.commit('updateOpenModal', { modalName: 'CreateEditModal', swappId: id });
     }
+  },
+  mounted() {
+    this.init();
   }
 }
 </script>

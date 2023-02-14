@@ -6,12 +6,26 @@
 
       <div class="form-input-cover">
         <div class="form-input-legend">Deck in</div>
-        <input type="text" class="form-input">
+        <VueMultiselect 
+          v-model="intForm.deckIn" 
+          :options="cardNames"
+          :close-on-select="true"
+          :clear-on-select="false"
+          :max-height="200"
+          placeholder=""
+        ></VueMultiselect>
       </div>
 
       <div class="form-input-cover">
         <div class="form-input-legend">Deck out</div>
-        <input type="text" class="form-input">
+        <VueMultiselect 
+          v-model="intForm.deckOut" 
+          :options="cardNames"
+          :close-on-select="true"
+          :clear-on-select="false"
+          :max-height="200"
+          placeholder=""
+        ></VueMultiselect>
       </div>
 
       <div class="form-input-cover">
@@ -41,7 +55,7 @@
   </div>
 
   <div class="modal-controls">
-    <button class="form-button">Submit</button>
+    <button class="form-button" @click="updateSwappItem">Submit</button>
     <button class="form-button" @click="cancelChangesInForm">Cancel</button>
   </div>
 
@@ -61,6 +75,7 @@ export default {
   data() {
     return {
       isInit: false,
+      swappId: null,
       cardNames: null,
       extForm: {
         deckIn: null,
@@ -75,9 +90,6 @@ export default {
     init() {
       this.intForm = cloneObject(this.extForm);
       this.isInit = true;
-    },
-    submitForm() {
-      console.log('submitted')
     },
     cancelChangesInForm() {
       this.intForm = cloneObject(this.extForm);
@@ -96,8 +108,17 @@ export default {
           this.init();
         });
       }
+    },
+    generateSwappId() {
+      return String(Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '');
+    },
+    updateSwappItem() {
+      if (!this.swappId) {
+        this.swappId = this.generateSwappId();
+      }
+      localStorage.setLocalStorage(this.swappId, this.intForm);
+      this.$store.commit('closeModal');
     }
-      
   },
   mounted() {
     this.getCardNames();

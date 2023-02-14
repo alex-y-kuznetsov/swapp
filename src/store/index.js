@@ -3,7 +3,8 @@ import { createStore } from 'vuex';
 const store = createStore({
   state: {
     appName: 'swApp',
-    openModal: null
+    openModal: null,
+    modalPayload: null
   },
   getters: {
     appName(state) {
@@ -14,11 +15,15 @@ const store = createStore({
     }
   },
   mutations: {
-    updateOpenModal(state, modalName) {
-      state.openModal = modalName
+    updateOpenModal(state, payload) {
+      state.openModal = payload.modalName;
+      if (payload.swappId) { 
+        state.modalPayload = payload.swappId;
+      }
     },
     closeModal(state) {
-      state.openModal = null
+      state.openModal = null;
+      state.modalPayload = null;
     }
   }
 })
