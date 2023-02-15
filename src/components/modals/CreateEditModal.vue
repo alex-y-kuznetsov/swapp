@@ -140,7 +140,7 @@ export default {
 
       Promise.all(promises).then(() => {
         localStorage.setLocalStorage(this.swappId, objectForSend);
-        this.$store.commit('closeModal')
+        this.$store.commit('closeModal');
       });
     }
   },

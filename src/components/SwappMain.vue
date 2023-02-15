@@ -8,25 +8,25 @@
   </div>
 
   <template v-if="isInit">
-    <div class="swapp-item swapp-item-general">
+    <div class="swapp-item swapp-item-general" v-for="(item, itemKey) in swappList" :key="itemKey">
       <div>
-        <div class="swapp-input">Deck 1</div>
+        <div class="swapp-input">{{ item.deckIn ? item.deckIn.name : '-' }}</div>
       </div>
       <div class="swapp-item-mid">
         <div class="swapp-item-mid-cover">
           <div class="swapp-item-image swapp-item-image-left">
-            <img src="https://cdn1.mtggoldfish.com/images/gf/Island%2B%253C371%253E%2B%255B10E%255D.jpg">
+            <img :src="item.cardIn ? item.cardIn.image_uris.normal : require('@/assets/images/card_back.jpg')">
           </div>
           <div class="swapp-item-image swapp-item-image-right">
-            <img src="https://cdn1.mtggoldfish.com/images/gf/Mountain%2B%253C376%253E%2B%255B10E%255D.jpg">
+            <img :src="item.cardOut ? item.cardOut.image_uris.normal : require('@/assets/images/card_back.jpg')">
           </div>
         </div>
       </div>
       <div>
-        <div class="swapp-input">Deck 2</div>
+        <div class="swapp-input">{{ item.deckOut ? item.deckIn.name : '-' }}</div>
       </div>
       <div class=" swapp-item-controls">
-        <button class="swapp-item-button" @click="openEditModal('123')">Edit</button>
+        <button class="swapp-item-button" @click="openEditModal(item.id)">Edit</button>
         <button class="swapp-item-button">Del</button>
         <button class="swapp-item-button">Top</button>
       </div>
