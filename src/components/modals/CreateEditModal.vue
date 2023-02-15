@@ -119,9 +119,9 @@ export default {
       }
 
       let objectForSend = {};
-      function getFullCardData(cardName, field) {
+      async function getFullCardData(cardName, field) {
         if(cardName) {
-          fetch(`${constants.API_URL}/cards/named?exact=${cardName}`)
+          await fetch(`${constants.API_URL}/cards/named?exact=${cardName}`)
           .then(response => response.json())
           .then((json) => {
             objectForSend[field] = json;
