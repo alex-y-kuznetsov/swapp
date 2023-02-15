@@ -169,10 +169,6 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
 <style src="@/assets/styles/multiselect_custom.less" lang="less"></style>
 <style lang="less" scoped>
-  .form-container {
-    margin-bottom: 20px;
-  }
-
   .form-input-cover {
     box-sizing: border-box;
 

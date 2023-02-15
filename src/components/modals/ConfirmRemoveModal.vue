@@ -1,5 +1,8 @@
 <template>
   <h1 class="modal-title">Clear all swaps?</h1>
+  <div>
+    This will remove all swaps from the list
+  </div>
   <div class="modal-controls">
     <button class="form-button" @click="clearAllSwapps">Clear</button>
     <button class="form-button" @click="cancelAndClose">Cancel</button>
