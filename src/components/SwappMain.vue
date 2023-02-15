@@ -1,10 +1,18 @@
 <template>
 
   <div class="swapp-item swapp-item-head">
-    <div>Deck in</div>
-    <div class="swapp-item-mid">The swap</div>
-    <div>Deck out</div>
-    <div class="swapp-item-controls"></div>
+    <div>
+      <IconIn />
+    </div>
+    <div class="swapp-item-mid">
+      <IconShuffle />
+    </div>
+    <div>
+      <IconOut />
+    </div>
+    <div class="swapp-item-controls">
+      <IconWrench />
+    </div>
   </div>
 
   <template v-if="isInit">
@@ -36,9 +44,20 @@
         </div>
       </div> 
       <div class="swapp-item-controls">
-        <button class="swapp-item-button" @click="openEditModal(item.id)">Edit</button>
-        <button class="swapp-item-button" @click="deleteSwappItem(item.id)">Del</button>
-        <button class="swapp-item-button">Top</button>
+        <button 
+          class="swapp-item-button" 
+          @click="openEditModal(item.id)"
+          title="Edit"
+        >
+          <IconEdit />
+        </button>
+        <button 
+          class="swapp-item-button" 
+          @click="deleteSwappItem(item.id)"
+          title="Delete"
+        >
+          <IconDelete />
+        </button>
       </div>
     </div>
   </template>
@@ -49,9 +68,23 @@
 import { mapGetters } from 'vuex';
 import cloneObject from '@/helpers/cloneObject.js';
 import localStorageHelper from '@/helpers/localStorageHelper.js';
+import IconEdit from '@/components/icons/IconEdit.vue';
+import IconDelete from '@/components/icons/IconDelete.vue';
+import IconIn from '@/components/icons/IconIn.vue';
+import IconOut from '@/components/icons/IconOut.vue';
+import IconShuffle from '@/components/icons/IconShuffle.vue';
+import IconWrench from '@/components/icons/IconWrench.vue';
 
 export default {
   name: 'SwappMain',
+  components: {
+    IconEdit,
+    IconDelete,
+    IconIn,
+    IconOut,
+    IconShuffle,
+    IconWrench
+  },
   data() {
     return {
       isInit: false,
@@ -175,6 +208,21 @@ export default {
     text-align: center;
     padding: 4px 0;
     grid-template-columns: 30% auto 30% 40px;
+
+    div {
+      &:not(:first-child) {
+        border-left: 2px solid var(--color-main);
+      }
+    }
+
+    .swapp-item-controls {
+      align-items: center;
+    }
+
+    svg {
+      fill: var(--color-main);
+      vertical-align: middle;
+    }
   }
 
   .swapp-input {
@@ -242,8 +290,9 @@ export default {
   .swapp-item-controls {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-end;
+    gap: 4px;
   }
 
   .swapp-item-button {
@@ -257,11 +306,23 @@ export default {
     border-radius: 6px;
     font-weight: 600;
     transition: all var(--main-transition);
+    display: flex;
+
+    svg {
+      fill: var(--color-bg);
+      margin: auto;
+      transition: all var(--main-transition);
+    }
 
     &:hover {
       color: var(--color-white);
       background-color: var(--color-bg);
       transition: all var(--main-transition);
+
+      svg {
+        fill: var(--color-white);
+        transition: all var(--main-transition);
+      }
     }
   }
 </stype>

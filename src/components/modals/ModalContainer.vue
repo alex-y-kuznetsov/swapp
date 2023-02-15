@@ -7,7 +7,9 @@
         <div class="modal-overlay" @click="modalClose"></div>
 
         <div class="modal-content">
-          <button class="modal-close" @click="modalClose">X</button>
+          <button class="modal-close" @click="modalClose">
+            <IconCross />
+          </button>
           <component :is="this.$store.getters.openModal"></component>
         </div>
       </div>
@@ -19,12 +21,14 @@
 <script>
 import CreateEditModal from '@/components/modals/CreateEditModal.vue';
 import ConfirmRemoveModal from '@/components/modals/ConfirmRemoveModal.vue';
+import IconCross from '@/components/icons/IconCross.vue';
 
 export default {
   name: 'ModalContainer',
   components: {
     CreateEditModal,
-    ConfirmRemoveModal
+    ConfirmRemoveModal,
+    IconCross
   },
   methods: {
     modalClose() {
@@ -79,19 +83,25 @@ export default {
     position: absolute;
     right: 10px;
     top: 10px;
-    border: none;
     background-color: transparent;
     cursor: pointer;
-    font-weight: 600;
     border: 1px solid var(--color-main);
     border-radius: 4px;
-    padding: 2px 4px 1px 4px;
+    padding: 3px 6px 4px 6px;
     transition: all var(--main-transition);
 
+    svg {
+      fill: var(--color-white);
+      vertical-align: middle;
+    }
+
     &:hover {
-      color: var(--color-secondary);
       border: 1px solid var(--color-secondary);
       transition: all var(--main-transition);
+
+      svg {
+        fill: var(--color-secondary);
+      }
     }
   }
 </style>
