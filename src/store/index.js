@@ -12,6 +12,9 @@ const store = createStore({
     },
     openModal(state) {
       return state.openModal
+    },
+    modalPayload(state) {
+      return state.modalPayload
     }
   },
   mutations: {

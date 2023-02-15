@@ -88,6 +88,13 @@ export default {
   },
   methods: {
     init() {
+      if (this.$store.getters.modalPayload) {
+        this.swappId = this.$store.getters.modalPayload;
+        const itemInStorage = localStorage.getLocalStorage(this.swappId);
+        for (let key in this.extForm) {
+          this.extForm[key] = itemInStorage[key]?.name
+        }
+      }
       this.intForm = cloneObject(this.extForm);
       this.isInit = true;
     },
