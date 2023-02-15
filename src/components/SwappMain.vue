@@ -104,6 +104,10 @@ export default {
   .swapp-item-cover {
     display: grid;
     grid-template-columns: auto 40px;
+
+    & + & {
+      margin-top: 10px;
+    }
   }
 
   .swapp-item {
@@ -171,12 +175,6 @@ export default {
     text-align: center;
     padding: 4px 0;
     grid-template-columns: 30% auto 30% 40px;
-  }
-
-  .swapp-item-general {
-    & + & {
-      margin-top: 10px;
-    }
   }
 
   .swapp-input {
