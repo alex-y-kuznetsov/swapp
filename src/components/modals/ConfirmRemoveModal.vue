@@ -22,6 +22,7 @@ export default {
     },
     cancelAndClose() {
       this.$store.commit('closeModal');
+      this.$store.commit('triggerReInitFlag');
     }
   }
 }

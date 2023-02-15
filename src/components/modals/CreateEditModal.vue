@@ -148,6 +148,7 @@ export default {
       Promise.all(promises).then(() => {
         localStorageHelper.setLocalStorage(this.swappId, objectForSend);
         this.$store.commit('closeModal');
+        this.$store.commit('triggerReInitFlag');
       });
     }
   },
@@ -160,12 +161,6 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
 <style src="@/assets/styles/multiselect_custom.less" lang="less"></style>
 <style lang="less" scoped>
-  .modal-title {
-    font-size: 22px;
-    font-weight: 400;
-    margin: 0 0 40px 0;
-  }
-
   .form-container {
     margin-bottom: 20px;
   }
@@ -196,28 +191,5 @@ export default {
   .form-input-legend {
     font-size: 14px;
     color: var(--color-secondary);
-  }
-
-  .modal-controls {
-    display: flex;
-    justify-content: flex-end;
-    gap: 6px;
-
-  }
-
-  .form-button {
-    border: none;
-    background-color: transparent;
-    font-size: 16px;
-    padding: 8px 10px;
-    border: 1px solid var(--color-main);
-    border-radius: 6px;
-    cursor: pointer;
-
-    &:hover {
-      color: var(--color-secondary);
-      border: 1px solid var(--color-secondary);
-      transition: all var(--main-transition);
-    }
   }
 </style>

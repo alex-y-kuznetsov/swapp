@@ -4,7 +4,8 @@ const store = createStore({
   state: {
     appName: 'swApp',
     openModal: null,
-    modalPayload: null
+    modalPayload: null,
+    reInitFlag: false
   },
   getters: {
     appName(state) {
@@ -15,6 +16,9 @@ const store = createStore({
     },
     modalPayload(state) {
       return state.modalPayload
+    },
+    reInitFlag(state) {
+      return state.reInitFlag
     }
   },
   mutations: {
@@ -27,6 +31,12 @@ const store = createStore({
     closeModal(state) {
       state.openModal = null;
       state.modalPayload = null;
+    },
+    triggerReInitFlag(state) {
+      state.reInitFlag = true;
+      setTimeout (() => {
+        state.reInitFlag = false;
+      }, 1);
     }
   }
 })

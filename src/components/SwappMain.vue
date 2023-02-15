@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import cloneObject from '@/helpers/cloneObject.js';
 import localStorageHelper from '@/helpers/localStorageHelper.js';
 
@@ -49,6 +50,7 @@ export default {
   },
   methods: {
     init() {
+      this.swappList = [];
       let tempList = cloneObject(localStorage);
       delete tempList.cardNames;
 
@@ -68,6 +70,18 @@ export default {
       localStorageHelper.removeFromStorage(id);
       const itemToRemove = this.swappList.find(item => item.id === id);
       this.swappList.splice(itemToRemove, 1);
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'reInitFlag'
+    ]),
+  },
+  watch: {
+    reInitFlag() {
+      if (this.reInitFlag) {
+        this.init();
+      }
     }
   },
   mounted() {
