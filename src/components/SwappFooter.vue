@@ -3,7 +3,7 @@
     <div class="footer-controls">
       <button class="footer-button" @click="openEditModal">Create</button>
       <button class="footer-button">Help</button>
-      <button class="footer-button">Clear</button>
+      <button class="footer-button" @click="showConfirmRemoveModal">Clear</button>
     </div>
     <div class="footer-copyright">{{  getYear() }}</div>
   </div>
@@ -15,6 +15,9 @@ export default {
   methods: {
     openEditModal() {
       this.$store.commit('updateOpenModal', { modalName: 'CreateEditModal' });
+    },
+    showConfirmRemoveModal() {
+      this.$store.commit('updateOpenModal', { modalName: 'ConfirmRemoveModal' });
     },
     getYear() {
       const today = new Date();

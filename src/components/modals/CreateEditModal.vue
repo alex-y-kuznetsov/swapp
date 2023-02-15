@@ -158,7 +158,7 @@ export default {
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
-<style src="@/static/multiselect_custom.less" lang="less"></style>
+<style src="@/assets/styles/multiselect_custom.less" lang="less"></style>
 <style lang="less" scoped>
   .modal-title {
     font-size: 22px;

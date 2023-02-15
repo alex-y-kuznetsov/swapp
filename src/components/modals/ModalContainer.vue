@@ -18,11 +18,13 @@
 
 <script>
 import CreateEditModal from '@/components/modals/CreateEditModal.vue';
+import ConfirmRemoveModal from '@/components/modals/ConfirmRemoveModal.vue';
 
 export default {
   name: 'ModalContainer',
   components: {
-    CreateEditModal
+    CreateEditModal,
+    ConfirmRemoveModal
   },
   methods: {
     modalClose() {
