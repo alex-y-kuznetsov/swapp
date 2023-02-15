@@ -65,7 +65,7 @@
 import VueMultiselect from 'vue-multiselect'
 import constants from '@/static/constants.js';
 import cloneObject from '@/helpers/cloneObject.js';
-import localStorage from '@/helpers/localStorage.js';
+import localStorageHelper from '@/helpers/localStorageHelper.js';
 
 export default {
   name: 'CreateEditModal',
@@ -90,7 +90,7 @@ export default {
     init() {
       if (this.$store.getters.modalPayload) {
         this.swappId = this.$store.getters.modalPayload;
-        const itemInStorage = localStorage.getLocalStorage(this.swappId);
+        const itemInStorage = localStorageHelper.getLocalStorage(this.swappId);
         for (let key in this.extForm) {
           this.extForm[key] = itemInStorage[key]?.name
         }
@@ -102,8 +102,8 @@ export default {
       this.intForm = cloneObject(this.extForm);
     },
     getCardNames() {
-      if (localStorage.getLocalStorage('cardNames')) {
-        this.cardNames = localStorage.getLocalStorage('cardNames');
+      if (localStorageHelper.getLocalStorage('cardNames')) {
+        this.cardNames = localStorageHelper.getLocalStorage('cardNames');
         this.init();
       } else {
         const storageTime = 3600000;
@@ -111,7 +111,7 @@ export default {
         .then(response => response.json())
         .then(json => this.cardNames = json.data)
         .then(() => {
-          localStorage.setLocalStorage('cardNames', this.cardNames, storageTime)
+          localStorageHelper.setLocalStorage('cardNames', this.cardNames, storageTime)
           this.init();
         });
       }
@@ -146,7 +146,7 @@ export default {
       }
 
       Promise.all(promises).then(() => {
-        localStorage.setLocalStorage(this.swappId, objectForSend);
+        localStorageHelper.setLocalStorage(this.swappId, objectForSend);
         this.$store.commit('closeModal');
       });
     }

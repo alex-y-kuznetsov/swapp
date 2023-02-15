@@ -27,7 +27,7 @@
       </div>
       <div class=" swapp-item-controls">
         <button class="swapp-item-button" @click="openEditModal(item.id)">Edit</button>
-        <button class="swapp-item-button">Del</button>
+        <button class="swapp-item-button" @click="deleteSwappItem(item.id)">Del</button>
         <button class="swapp-item-button">Top</button>
       </div>
     </div> 
@@ -37,6 +37,7 @@
 
 <script>
 import cloneObject from '@/helpers/cloneObject.js';
+import localStorageHelper from '@/helpers/localStorageHelper.js';
 
 export default {
   name: 'SwappMain',
@@ -62,6 +63,11 @@ export default {
     },
     openEditModal(id) {
       this.$store.commit('updateOpenModal', { modalName: 'CreateEditModal', swappId: id });
+    },
+    deleteSwappItem(id) {
+      localStorageHelper.removeFromStorage(id);
+      const itemToRemove = this.swappList.find(item => item.id === id);
+      this.swappList.splice(itemToRemove, 1);
     }
   },
   mounted() {

@@ -7,7 +7,6 @@ export default {
     }
     localStorage.setItem(setName, JSON.stringify(item));
   },
-
   getLocalStorage(getName) {
     const itemStr = localStorage.getItem(getName);
       if (!itemStr) {
@@ -22,5 +21,8 @@ export default {
         return null;
       }
       return item.value;
+  },
+  removeFromStorage(removeName) {
+    localStorage.removeItem(removeName);
   }
 }
