@@ -21,6 +21,7 @@
 <script>
 import CreateEditModal from '@/components/modals/CreateEditModal.vue';
 import ConfirmRemoveModal from '@/components/modals/ConfirmRemoveModal.vue';
+import HelpModal from '@/components/modals/HelpModal.vue';
 import IconCross from '@/components/icons/IconCross.vue';
 
 export default {
@@ -28,6 +29,7 @@ export default {
   components: {
     CreateEditModal,
     ConfirmRemoveModal,
+    HelpModal,
     IconCross
   },
   methods: {

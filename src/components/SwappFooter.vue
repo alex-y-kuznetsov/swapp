@@ -1,8 +1,8 @@
 <template>
   <div class="footer-cover">
     <div class="footer-controls">
-      <button class="footer-button" @click="openEditModal">Create</button>
-      <button class="footer-button">Help</button>
+      <button class="footer-button" @click="showCreateEditModal">Create</button>
+      <button class="footer-button" @click="showHelpModal">Help</button>
       <button class="footer-button" @click="showConfirmRemoveModal">Clear</button>
     </div>
     <div class="footer-copyright">{{  getYear() }}</div>
@@ -13,8 +13,11 @@
 export default {
   name: 'SwappFooter',
   methods: {
-    openEditModal() {
+    showCreateEditModal() {
       this.$store.commit('updateOpenModal', { modalName: 'CreateEditModal' });
+    },
+    showHelpModal() {
+      this.$store.commit('updateOpenModal', { modalName: 'HelpModal' });
     },
     showConfirmRemoveModal() {
       this.$store.commit('updateOpenModal', { modalName: 'ConfirmRemoveModal' });

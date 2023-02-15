@@ -2,7 +2,7 @@ import { createStore } from 'vuex';
 
 const store = createStore({
   state: {
-    appName: 'swApp',
+    appName: 'Swapp',
     openModal: null,
     modalPayload: null,
     reInitFlag: false
