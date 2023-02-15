@@ -87,7 +87,7 @@ export default {
     cursor: pointer;
     border: 1px solid var(--color-main);
     border-radius: 4px;
-    padding: 3px 6px 4px 6px;
+    padding: 3px 6px 4px 5px;
     transition: all var(--main-transition);
 
     svg {
