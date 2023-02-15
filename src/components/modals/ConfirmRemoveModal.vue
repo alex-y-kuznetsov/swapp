@@ -19,10 +19,10 @@ export default {
         }
       }
       this.cancelAndClose();
+      this.$store.commit('triggerReInitFlag');
     },
     cancelAndClose() {
       this.$store.commit('closeModal');
-      this.$store.commit('triggerReInitFlag');
     }
   }
 }

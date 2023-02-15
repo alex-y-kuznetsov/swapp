@@ -56,7 +56,7 @@
 
   <div class="modal-controls">
     <button class="form-button" @click="updateSwappItem">Submit</button>
-    <button class="form-button" @click="cancelChangesInForm">Cancel</button>
+    <button class="form-button" @click="formChangesMade ? cancelChangesInForm() : closeModal()">Cancel</button>
   </div>
 
 </template>
@@ -100,6 +100,9 @@ export default {
     },
     cancelChangesInForm() {
       this.intForm = cloneObject(this.extForm);
+    },
+    closeModal() {
+      this.$store.commit('closeModal');
     },
     getCardNames() {
       if (localStorageHelper.getLocalStorage('cardNames')) {
@@ -150,6 +153,11 @@ export default {
         this.$store.commit('closeModal');
         this.$store.commit('triggerReInitFlag');
       });
+    }
+  },
+  computed: {
+    formChangesMade() {
+      return JSON.stringify(this.intForm) !== JSON.stringify(this.extForm);
     }
   },
   mounted() {
