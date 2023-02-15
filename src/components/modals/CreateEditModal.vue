@@ -1,7 +1,11 @@
 <template>
   <h1 class="modal-title">Create/edit a swap</h1>
 
-  <div class="form-container" v-if="isInit">
+  <div v-if="!isInit">
+    <SwappLoader />
+  </div>
+  
+  <div class="form-container" v-else>
     <div class="create-form">
 
       <div class="form-input-cover">
@@ -66,15 +70,18 @@ import VueMultiselect from 'vue-multiselect'
 import constants from '@/static/constants.js';
 import cloneObject from '@/helpers/cloneObject.js';
 import localStorageHelper from '@/helpers/localStorageHelper.js';
+import SwappLoader from '@/components/SwappLoader.vue';
 
 export default {
   name: 'CreateEditModal',
   components: {
-    VueMultiselect
+    VueMultiselect,
+    SwappLoader
   },
   data() {
     return {
       isInit: false,
+      isLoading: false,
       swappId: null,
       cardNames: null,
       extForm: {
