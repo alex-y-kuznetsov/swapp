@@ -1,20 +1,22 @@
 <template>
-  <div class="modal-container">
-    <template v-if="this.$store.getters.openModal">
+  <div class="modal-container" >
+    <Transition>
+      <template v-if="this.$store.getters.openModal">
 
-      <div class="modal-wrap">
+        <div class="modal-wrap">
 
-        <div class="modal-overlay" @click="modalClose"></div>
+          <div class="modal-overlay" @click="modalClose"></div>
 
-        <div class="modal-content">
-          <button class="modal-close" @click="modalClose">
-            <IconCross />
-          </button>
-          <component :is="this.$store.getters.openModal"></component>
+          <div class="modal-content">
+            <button class="modal-close" @click="modalClose">
+              <IconCross />
+            </button>
+            <component :is="this.$store.getters.openModal"></component>
+          </div>
         </div>
-      </div>
 
-    </template>
+      </template>
+    </Transition>
   </div>
 </template>
 
@@ -105,5 +107,14 @@ export default {
         fill: var(--color-secondary);
       }
     }
+  }
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
   }
 </style>
