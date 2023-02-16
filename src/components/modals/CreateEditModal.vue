@@ -59,11 +59,21 @@
   </div>
 
   <div class="modal-controls">
-    <button class="form-button" @click="updateSwappItem">
+    <button 
+      class="form-button" 
+      :class="{ disabled: isSending }"
+      @click="updateSwappItem"
+      :disabled="isSending"
+    >
       <SwappLoaderButton v-if="isSending" />
       <span v-else>Submit</span>
     </button>
-    <button class="form-button" @click="formChangesMade ? cancelChangesInForm() : closeModal()">
+    <button 
+      class="form-button" 
+      :class="{ disabled: isSending }"
+      @click="formChangesMade ? cancelChangesInForm() : closeModal()"
+      :disabled="isSending"
+    >
       <SwappLoaderButton v-if="isSending" />
       <span v-else>Cancel</span>
     </button>
