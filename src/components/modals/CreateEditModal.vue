@@ -12,11 +12,11 @@
         :class="{ error : validationErrors.indexOf('deckIn') > -1 }"
       >
         <div class="form-input-legend">
-          Deck in 
+          Deck in *
           <span 
             class="validation-hint"
             v-if="validationErrors.indexOf('deckIn') > -1">
-              * - this field is required
+              - this field is required
           </span>
         </div>
         <VueMultiselect 
@@ -47,12 +47,12 @@
         :class="{ error : validationErrors.indexOf('cardIn') > -1 }"
       >
         <div class="form-input-legend">
-          Card in
+          Card in *
           <span 
             class="validation-hint"
             v-if="validationErrors.indexOf('cardIn') > -1"
           >
-            * - this field is required
+            - this field is required
           </span>
         </div>
         <VueMultiselect 
