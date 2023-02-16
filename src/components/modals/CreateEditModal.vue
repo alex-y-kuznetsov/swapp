@@ -156,6 +156,7 @@ export default {
       }
 
       Promise.all(promises).then(() => {
+        objectForSend.created = Date.now();
         localStorageHelper.setLocalStorage(this.swappId, objectForSend);
         this.$store.commit('closeModal');
         this.$store.commit('triggerReInitFlag');

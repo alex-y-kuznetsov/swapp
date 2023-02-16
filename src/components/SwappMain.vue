@@ -112,6 +112,8 @@ export default {
         })
       }
 
+      this.swappList.sort((a, b) => a.created - b.created).reverse();
+
       this.isInit = true;
     },
     openEditModal(id) {
@@ -216,6 +218,8 @@ export default {
     text-align: center;
     padding: 4px 0;
     grid-template-columns: 30% auto 30% 40px;
+    min-height: 30px;
+    box-sizing: border-box;
 
     div {
       &:not(:first-child) {
