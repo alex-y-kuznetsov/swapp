@@ -23,6 +23,7 @@ export default {
       }
       this.cancelAndClose();
       this.$store.commit('triggerReInitFlag');
+      this.$store.commit('triggerActionsMessage', 'All swaps removed')
     },
     cancelAndClose() {
       this.$store.commit('closeModal');

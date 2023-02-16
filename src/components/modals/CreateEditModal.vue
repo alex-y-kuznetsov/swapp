@@ -209,10 +209,14 @@ export default {
       }
 
       this.validateRequiredFields();
+      let actionMessage;
 
       if (!this.validationErrors.length) {
         if (!this.swappId) {
+          actionMessage = 'Swap created'
           this.swappId = this.generateSwappId();
+        } else {
+          actionMessage = 'Swap updated'
         }
 
         Promise.all(promises).then(() => {
@@ -221,6 +225,7 @@ export default {
           this.isSending = false;
           this.$store.commit('closeModal');
           this.$store.commit('triggerReInitFlag');
+          this.$store.commit('triggerActionsMessage', actionMessage)
         });
       }
       

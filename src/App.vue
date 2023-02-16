@@ -3,17 +3,20 @@
     <HomePage />
   </div>
 <ModalContainer />
+<SwappActions />
 </template>
 
 <script>
-import HomePage from './pages/HomePage.vue';
-import ModalContainer from './components/modals/ModalContainer.vue'
+import HomePage from '@/pages/HomePage.vue';
+import ModalContainer from '@/components/modals/ModalContainer.vue'
+import SwappActions from '@/components/SwappActions.vue'
 
 export default {
   name: 'App',
   components: {
     HomePage,
-    ModalContainer
+    ModalContainer,
+    SwappActions
   }
 }
 </script>

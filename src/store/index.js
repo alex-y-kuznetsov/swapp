@@ -6,7 +6,8 @@ const store = createStore({
     openModal: null,
     modalPayload: null,
     reInitFlag: false,
-    tableLength: null
+    tableLength: null,
+    actionsMessage: null
   },
   getters: {
     appName(state) {
@@ -23,6 +24,9 @@ const store = createStore({
     },
     tableLength(state) {
       return state.tableLength
+    },
+    actionsMessage(state) {
+      return state.actionsMessage
     }
   },
   mutations: {
@@ -44,6 +48,12 @@ const store = createStore({
     },
     setTableLength(state, payload) {
       state.tableLength = payload
+    },
+    triggerActionsMessage(state, payload) {
+      state.actionsMessage = payload;
+      setTimeout (() => {
+        state.actionsMessage = null;
+      }, 3000);
     }
   }
 })
