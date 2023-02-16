@@ -59,8 +59,14 @@
   </div>
 
   <div class="modal-controls">
-    <button class="form-button" @click="updateSwappItem">Submit</button>
-    <button class="form-button" @click="formChangesMade ? cancelChangesInForm() : closeModal()">Cancel</button>
+    <button class="form-button" @click="updateSwappItem">
+      <SwappLoaderButton v-if="isSending" />
+      <span v-else>Submit</span>
+    </button>
+    <button class="form-button" @click="formChangesMade ? cancelChangesInForm() : closeModal()">
+      <SwappLoaderButton v-if="isSending" />
+      <span v-else>Cancel</span>
+    </button>
   </div>
 
 </template>
@@ -71,17 +77,19 @@ import constants from '@/static/constants.js';
 import cloneObject from '@/helpers/cloneObject.js';
 import localStorageHelper from '@/helpers/localStorageHelper.js';
 import SwappLoader from '@/components/SwappLoader.vue';
+import SwappLoaderButton from '@/components/SwappLoaderButton.vue';
 
 export default {
   name: 'CreateEditModal',
   components: {
     VueMultiselect,
-    SwappLoader
+    SwappLoader,
+    SwappLoaderButton
   },
   data() {
     return {
       isInit: false,
-      isLoading: false,
+      isSending: false,
       swappId: null,
       cardNames: null,
       extForm: {
@@ -131,6 +139,7 @@ export default {
     },
     
     updateSwappItem() {
+      this.isSending  = true;
       if (!this.swappId) {
         this.swappId = this.generateSwappId();
       }
@@ -158,6 +167,7 @@ export default {
       Promise.all(promises).then(() => {
         objectForSend.created = Date.now();
         localStorageHelper.setLocalStorage(this.swappId, objectForSend);
+        this.isSending = false;
         this.$store.commit('closeModal');
         this.$store.commit('triggerReInitFlag');
       });
