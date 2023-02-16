@@ -7,9 +7,18 @@
   
   <div class="form-container" v-else>
     <div class="create-form">
-
-      <div class="form-input-cover">
-        <div class="form-input-legend">Deck in</div>
+      <div 
+        class="form-input-cover"
+        :class="{ error : validationErrors.indexOf('deckIn') > -1 }"
+      >
+        <div class="form-input-legend">
+          Deck in 
+          <span 
+            class="validation-hint"
+            v-if="validationErrors.indexOf('deckIn') > -1">
+              * - this field is required
+          </span>
+        </div>
         <VueMultiselect 
           v-model="intForm.deckIn" 
           :options="cardNames"
@@ -17,6 +26,7 @@
           :clear-on-select="false"
           :max-height="200"
           placeholder=""
+          @open="clearFromValidation('deckIn')"
         ></VueMultiselect>
       </div>
 
@@ -32,8 +42,19 @@
         ></VueMultiselect>
       </div>
 
-      <div class="form-input-cover">
-        <div class="form-input-legend">Card in</div>
+      <div 
+        class="form-input-cover"
+        :class="{ error : validationErrors.indexOf('cardIn') > -1 }"
+      >
+        <div class="form-input-legend">
+          Card in
+          <span 
+            class="validation-hint"
+            v-if="validationErrors.indexOf('cardIn') > -1"
+          >
+            * - this field is required
+          </span>
+        </div>
         <VueMultiselect 
           v-model="intForm.cardIn" 
           :options="cardNames"
@@ -41,6 +62,7 @@
           :clear-on-select="false"
           :max-height="200"
           placeholder=""
+          @open="clearFromValidation('cardIn')"
         ></VueMultiselect>
       </div>
       
@@ -102,6 +124,8 @@ export default {
       isSending: false,
       swappId: null,
       cardNames: null,
+      requiredFields: ['cardIn', 'deckIn'],
+      validationErrors: [],
       extForm: {
         deckIn: null,
         deckOut: null,
@@ -147,12 +171,22 @@ export default {
     generateSwappId() {
       return String(Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '');
     },
-    
+    validateRequiredFields() {
+      this.validationErrors = [];
+      this.requiredFields.forEach(item => {
+        if (!this.intForm[item]) {
+          this.validationErrors.push(item);
+          this.isSending = false;
+        }
+      })
+    },
+    clearFromValidation(field) {
+      if (this.validationErrors.indexOf(field) > -1) {
+        this.validationErrors.splice(this.validationErrors.indexOf(field), 1);
+      }
+    },
     updateSwappItem() {
       this.isSending  = true;
-      if (!this.swappId) {
-        this.swappId = this.generateSwappId();
-      }
 
       let objectForSend = {};
       async function getFullCardData(cardName, field) {
@@ -174,13 +208,22 @@ export default {
         }))
       }
 
-      Promise.all(promises).then(() => {
-        objectForSend.created = Date.now();
-        localStorageHelper.setLocalStorage(this.swappId, objectForSend);
-        this.isSending = false;
-        this.$store.commit('closeModal');
-        this.$store.commit('triggerReInitFlag');
-      });
+      this.validateRequiredFields();
+
+      if (!this.validationErrors.length) {
+        if (!this.swappId) {
+          this.swappId = this.generateSwappId();
+        }
+
+        Promise.all(promises).then(() => {
+          objectForSend.created = Date.now();
+          localStorageHelper.setLocalStorage(this.swappId, objectForSend);
+          this.isSending = false;
+          this.$store.commit('closeModal');
+          this.$store.commit('triggerReInitFlag');
+        });
+      }
+      
     }
   },
   computed: {
@@ -203,6 +246,10 @@ export default {
     & + & {
       margin-top: 30px;
     }
+  }
+
+  .validation-hint {
+    color: var(--color-error);
   }
 
   .form-input {
