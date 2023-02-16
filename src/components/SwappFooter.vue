@@ -1,15 +1,28 @@
 <template>
   <div class="footer-cover">
     <div class="footer-controls">
-      <button class="footer-button" @click="showCreateEditModal">Create</button>
-      <button class="footer-button" @click="showHelpModal">Help</button>
-      <button class="footer-button" @click="showConfirmRemoveModal">Clear</button>
+      <button 
+        class="footer-button" 
+        @click="showCreateEditModal"
+      >Create</button>
+      <button 
+        class="footer-button" 
+        @click="showHelpModal"
+      >Help</button>
+      <button 
+        class="footer-button"  
+        :class="{ disabled: !this.tableLength }"
+        @click="showConfirmRemoveModal"
+        :disabled="!this.tableLength"
+      >Clear</button>
     </div>
     <div class="footer-copyright">{{  getYear() }}</div>
   </div>
 </template>
   
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'SwappFooter',
   methods: {
@@ -26,6 +39,11 @@ export default {
       const today = new Date();
       return today.getFullYear();
     }
+  },
+  computed: {
+    ...mapGetters([
+      'tableLength'
+    ])
   }
 }
 </script>
@@ -47,6 +65,11 @@ export default {
     background-color: transparent;
     cursor: pointer;
     transition: all var(--main-transition);
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
 
     & + & {
       margin-left: 8px;

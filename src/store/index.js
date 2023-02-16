@@ -5,7 +5,8 @@ const store = createStore({
     appName: 'Swapp',
     openModal: null,
     modalPayload: null,
-    reInitFlag: false
+    reInitFlag: false,
+    tableLength: null
   },
   getters: {
     appName(state) {
@@ -19,6 +20,9 @@ const store = createStore({
     },
     reInitFlag(state) {
       return state.reInitFlag
+    },
+    tableLength(state) {
+      return state.tableLength
     }
   },
   mutations: {
@@ -37,6 +41,9 @@ const store = createStore({
       setTimeout (() => {
         state.reInitFlag = false;
       }, 1);
+    },
+    setTableLength(state, payload) {
+      state.tableLength = payload
     }
   }
 })

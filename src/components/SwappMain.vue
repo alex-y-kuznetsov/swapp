@@ -111,9 +111,9 @@ export default {
           ...JSON.parse(tempList[item]).value
         })
       }
-
+      
       this.swappList.sort((a, b) => a.created - b.created).reverse();
-
+      this.$store.commit('setTableLength', this.swappList.length);
       this.isInit = true;
     },
     openEditModal(id) {
