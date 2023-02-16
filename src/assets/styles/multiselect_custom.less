@@ -60,3 +60,27 @@
     color: var(--color-main);
   }
 }
+
+.multiselect__option--highlight {
+  background-color: var(--color-bg);
+
+  &::after {
+    background-color: var(--color-bg);
+  }
+}
+
+.multiselect__option--selected {
+  &.multiselect__option--highlight {
+    background-color: var(--color-focus);
+
+    &::after {
+      background-color: var(--color-focus);
+    }
+  }
+}
+
+.multiselect--above {
+  .multiselect__content-wrapper {
+    border-bottom: 1px solid #e8e8e8;
+  }
+}
