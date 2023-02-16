@@ -16,6 +16,7 @@ export default {
   .loader-cover {
     height: 100%;
     display: flex;
+    flex: 1 1 0;
   }
 
   .loader-logo {

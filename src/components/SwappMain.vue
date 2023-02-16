@@ -15,6 +15,10 @@
     </div>
   </div>
 
+  <SwappNoData v-if="!swappList.length" />
+
+  <SwappLoader v-if="!isInit" />
+
   <template v-if="isInit">
     <div class="swapp-item-cover" v-for="(item, itemKey) in swappList" :key="itemKey">
       <div class="swapp-item swapp-item-general">
@@ -74,6 +78,8 @@ import IconIn from '@/components/icons/IconIn.vue';
 import IconOut from '@/components/icons/IconOut.vue';
 import IconShuffle from '@/components/icons/IconShuffle.vue';
 import IconWrench from '@/components/icons/IconWrench.vue';
+import SwappNoData from '@/components/SwappNoData.vue';
+import SwappLoader from '@/components/SwappLoader.vue';
 
 export default {
   name: 'SwappMain',
@@ -83,7 +89,9 @@ export default {
     IconIn,
     IconOut,
     IconShuffle,
-    IconWrench
+    IconWrench,
+    SwappNoData,
+    SwappLoader
   },
   data() {
     return {
