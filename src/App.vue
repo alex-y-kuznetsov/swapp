@@ -29,6 +29,7 @@ export default {
   --color-overlay: rgba(15,40,68,.4);
   --color-bg: #659dbd;
   --color-bg-secondary: #8D8741;
+  --color-scrollbar: rgba(0, 0, 0, 0.07);
   --main-transition: 0.2s;
   --main-shadow: 0 0 4px rgb(0 0 0 / 10%), 0 4px 12px rgb(0 0 0 / 10%);
 }

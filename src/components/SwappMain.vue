@@ -19,7 +19,7 @@
 
   <SwappLoader v-if="!isInit" />
 
-  <template v-if="isInit">
+  <div class="swapp-items" v-if="isInit">
     <div class="swapp-item-cover" v-for="(item, itemKey) in swappList" :key="itemKey">
       <div class="swapp-item swapp-item-general">
         <div class="swapp-segment">
@@ -64,7 +64,7 @@
         </button>
       </div>
     </div>
-  </template>
+  </div>
 
 </template>
 
@@ -144,6 +144,27 @@ export default {
 </script>
 
 <stype lang="less" scoped>
+  .swapp-items {
+    overflow: auto;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+        background-color: transparent;
+        margin-left: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--color-scrollbar);
+        border-radius: 6px;
+        -webkit-transition: background-color 2s;
+        transition: background-color 2s;
+    }
+  }
+
   .swapp-item-cover {
     display: grid;
     grid-template-columns: auto 40px;

@@ -31,8 +31,6 @@ export default {
   }
 
   .page-main {
-    padding: 20px 0;
-    overflow: auto;
     flex: 1 1 0;
     display: flex;
     flex-direction: column;
