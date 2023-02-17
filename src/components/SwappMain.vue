@@ -26,40 +26,40 @@
         <div class="swapp-segment">
           <div class="swapp-segment-bg swapp-segment-bg-left" 
             v-if="item.deckIn" 
-            :style="{ backgroundImage: `url('${item.deckIn.image_uris.art_crop})` }"
+            :style="{ backgroundImage: `url('${getUris(item.deckIn).image_uris?.art_crop})` }"
           ></div>
           <button 
             class="swapp-input"
-            @click="openShowCardModal(item.deckIn.image_uris.normal)"
+            @click="openShowCardModal(getUris(item.deckIn).image_uris?.normal)"
           >{{ item.deckIn.name }}</button>
         </div>
         <div class="swapp-segment swapp-item-mid">
           <div class="swapp-item-mid-cover">
             <button 
               class="swapp-item-image swapp-item-image-left"
-              @click="openShowCardModal(item.cardIn.image_uris.normal)"
+              @click="openShowCardModal(getUris(item.cardIn).image_uris?.normal)"
             >
-              <img :src="item.cardIn ? item.cardIn.image_uris.normal : require('@/assets/images/card_back.jpg')">
+              <img :src="item.cardIn ? getUris(item.cardIn).image_uris?.normal : require('@/assets/images/card_back.jpg')">
             </button>
             <button 
               class="swapp-item-image swapp-item-image-right"
               :class="{ disabled : !item.cardOut }"
-              @click="openShowCardModal(item.cardOut.image_uris.normal)"
+              @click="openShowCardModal(getUris(item.cardOut).image_uris?.normal)"
               :disabled="!item.cardOut"
             >
-              <img :src="item.cardOut ? item.cardOut.image_uris.normal : require('@/assets/images/card_back.jpg')">
+              <img :src="item.cardOut ? getUris(item.cardOut).image_uris?.normal : require('@/assets/images/card_back.jpg')">
             </button>
           </div>
         </div>
         <div class="swapp-segment">
           <div class="swapp-segment-bg swapp-segment-bg-right" 
             v-if="item.deckOut" 
-            :style="{ backgroundImage: `url('${item.deckOut.image_uris.art_crop})` }"
+            :style="{ backgroundImage: `url('${getUris(item.deckOut).image_uris?.art_crop})` }"
           ></div>
           <button 
             class="swapp-input" 
             v-if="item.deckOut"
-            @click="openShowCardModal(item.deckOut.image_uris.normal)"
+            @click="openShowCardModal(getUris(item.deckOut).image_uris?.normal)"
           >{{ item.deckOut.name }}</button>
         </div>
       </div> 
@@ -132,6 +132,9 @@ export default {
       this.swappList.sort((a, b) => a.created - b.created).reverse();
       this.$store.commit('setTableLength', this.swappList.length);
       this.isInit = true;
+    },
+    getUris(path) {
+      return (path.card_faces && !path.image_uris) ? path.card_faces[0] : path;
     },
     openEditModal(id) {
       this.$store.commit('updateOpenModal', { modalName: 'CreateEditModal', swappId: id });
