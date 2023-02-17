@@ -4,7 +4,7 @@
     <li>This app is designed to store your card swap ideas for your Commander/EDH decks</li>
     <li>You can choose a deck to put the card in, a card to take out and a new deck for the taken out card</li>
     <li>Create now and edit at a later time</li>
-    <li>Swapps are stored in local storage so they won't persist through different browsers</li>
+    <li>Swaps are stored in local storage so they won't persist through different browsers</li>
     <li>MTG cards API courtesy of Scryfall</li>
   </ul>
   <div class="modal-controls">
