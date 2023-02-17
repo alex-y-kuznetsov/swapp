@@ -59,6 +59,7 @@ input {
 }
 
 button {
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
   color: var(--color-main);
   background-color: transparent;
 }

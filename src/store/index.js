@@ -32,6 +32,9 @@ const store = createStore({
   mutations: {
     updateOpenModal(state, payload) {
       state.openModal = payload.modalName;
+      if (payload.url) {
+        state.modalPayload = payload.url
+      }
       if (payload.swappId) { 
         state.modalPayload = payload.swappId;
       }

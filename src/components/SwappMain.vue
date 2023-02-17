@@ -20,6 +20,7 @@
   <SwappLoader v-if="!isInit" />
 
   <div class="swapp-items" v-if="isInit">
+
     <div class="swapp-item-cover" v-for="(item, itemKey) in swappList" :key="itemKey">
       <div class="swapp-item swapp-item-general">
         <div class="swapp-segment">
@@ -27,16 +28,27 @@
             v-if="item.deckIn" 
             :style="{ backgroundImage: `url('${item.deckIn.image_uris.art_crop})` }"
           ></div>
-          <div class="swapp-input">{{ item.deckIn ? item.deckIn.name : '-' }}</div>
+          <button 
+            class="swapp-input"
+            @click="openShowCardModal(item.deckIn.image_uris.normal)"
+          >{{ item.deckIn.name }}</button>
         </div>
         <div class="swapp-segment swapp-item-mid">
           <div class="swapp-item-mid-cover">
-            <div class="swapp-item-image swapp-item-image-left">
+            <button 
+              class="swapp-item-image swapp-item-image-left"
+              @click="openShowCardModal(item.cardIn.image_uris.normal)"
+            >
               <img :src="item.cardIn ? item.cardIn.image_uris.normal : require('@/assets/images/card_back.jpg')">
-            </div>
-            <div class="swapp-item-image swapp-item-image-right">
+            </button>
+            <button 
+              class="swapp-item-image swapp-item-image-right"
+              :class="{ disabled : !item.cardOut }"
+              @click="openShowCardModal(item.cardOut.image_uris.normal)"
+              :disabled="!item.cardOut"
+            >
               <img :src="item.cardOut ? item.cardOut.image_uris.normal : require('@/assets/images/card_back.jpg')">
-            </div>
+            </button>
           </div>
         </div>
         <div class="swapp-segment">
@@ -44,7 +56,11 @@
             v-if="item.deckOut" 
             :style="{ backgroundImage: `url('${item.deckOut.image_uris.art_crop})` }"
           ></div>
-          <div class="swapp-input">{{ item.deckOut ? item.deckOut.name : '-' }}</div>
+          <button 
+            class="swapp-input" 
+            v-if="item.deckOut"
+            @click="openShowCardModal(item.deckOut.image_uris.normal)"
+          >{{ item.deckOut.name }}</button>
         </div>
       </div> 
       <div class="swapp-item-controls">
@@ -64,6 +80,7 @@
         </button>
       </div>
     </div>
+
   </div>
 
 </template>
@@ -118,6 +135,9 @@ export default {
     },
     openEditModal(id) {
       this.$store.commit('updateOpenModal', { modalName: 'CreateEditModal', swappId: id });
+    },
+    openShowCardModal(url) {
+      this.$store.commit('updateOpenModal', { modalName: 'ShowCardModal', url });
     },
     deleteSwappItem(id) {
       localStorageHelper.removeFromStorage(id);
@@ -268,10 +288,21 @@ export default {
     border: none;
     border-bottom: 1px solid var(--color-main);
     position: relative;
+    text-align: left;
+    cursor: pointer;
+    transition: all var(--main-transition);
+    text-shadow: 1px 1px #000000;
+
+    &:hover {
+      color: var(--color-focus);
+      border-bottom: 1px solid var(--color-focus);
+      transition: all var(--main-transition);
+    }
 
     &:focus {
       outline: none;
       border-bottom: 1px solid var(--color-focus);
+      transition: all var(--main-transition);
     }
   }
 
@@ -303,6 +334,18 @@ export default {
     height: 100%;
     position: relative;
     transition: all var(--main-transition);
+    padding: 0;
+    border: none;
+    cursor: pointer;
+
+    &.disabled {
+      pointer-events: none;
+    }
+
+    &:hover {
+      box-shadow: var(--main-shadow);
+      transition: all var(--main-transition);
+    }
 
     img {
       height: 100%;
