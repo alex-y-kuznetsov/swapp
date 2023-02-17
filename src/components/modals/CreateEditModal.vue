@@ -81,20 +81,21 @@
   </div>
 
   <div class="modal-controls">
+    <span class="api-error">{{ this.apiErrors }}</span>
     <button 
       class="form-button" 
-      :class="{ disabled: isSending }"
+      :class="{ disabled: isSending || !isInit }"
       @click="updateSwappItem"
-      :disabled="isSending"
+      :disabled="isSending || !isInit"
     >
       <SwappLoaderButton v-if="isSending" />
       <span v-else>Submit</span>
     </button>
     <button 
       class="form-button" 
-      :class="{ disabled: isSending }"
-      @click="formChangesMade ? cancelChangesInForm() : closeModal()"
-      :disabled="isSending"
+      :class="{ disabled: isSending || !isInit }"
+      @click="formChangesMade && isInit ? cancelChangesInForm() : closeModal()"
+      :disabled="isSending || !isInit"
     >
       <SwappLoaderButton v-if="isSending" />
       <span v-else>Cancel</span>
@@ -126,6 +127,7 @@ export default {
       cardNames: null,
       requiredFields: ['cardIn', 'deckIn'],
       validationErrors: [],
+      apiErrors: null,
       extForm: {
         deckIn: null,
         deckOut: null,
@@ -148,6 +150,8 @@ export default {
       this.isInit = true;
     },
     cancelChangesInForm() {
+      this.apiErrors = null;
+      this.validationErrors = [];
       this.intForm = cloneObject(this.extForm);
     },
     closeModal() {
@@ -160,11 +164,20 @@ export default {
       } else {
         const storageTime = 3600000;
         fetch(`${constants.API_URL}/catalog/card-names`)
-        .then(response => response.json())
+        .then(response => {
+          if(response?.ok) {
+            return response.json()
+          }
+          throw new Error('Something went wrong. Please try again');
+        })
         .then(json => this.cardNames = json.data)
         .then(() => {
           localStorageHelper.setLocalStorage('cardNames', this.cardNames, storageTime)
           this.init();
+        })
+        .catch(error => {
+          this.apiErrors = 'Something went wrong. Please try again';
+          console.log(error);
         });
       }
     },
@@ -192,9 +205,18 @@ export default {
       async function getFullCardData(cardName, field) {
         if(cardName) {
           await fetch(`${constants.API_URL}/cards/named?exact=${cardName}`)
-          .then(response => response.json())
+          .then(response => {
+            if (response?.ok) {
+              return response.json()
+            }
+            throw new Error('Something went wrong. Please try again');
+          })
           .then((json) => {
             objectForSend[field] = json;
+          })
+          .catch((error) => {
+            console.log(error)
+            this.apiErrors = 'Something went wrong. Please try again';
           })
         } else {
           objectForSend[field] = null;
@@ -204,7 +226,7 @@ export default {
       let promises = [];
       for (const key in this.intForm) {
           promises.push(new Promise((resolve) => {
-          resolve(getFullCardData(this.intForm[key], key))
+          resolve(getFullCardData(this.intForm[key], key));
         }))
       }
 
@@ -219,14 +241,20 @@ export default {
           actionMessage = 'Swap updated'
         }
 
-        Promise.all(promises).then(() => {
+        Promise.all(promises)
+        .then(() => {
           objectForSend.created = Date.now();
           localStorageHelper.setLocalStorage(this.swappId, objectForSend);
           this.isSending = false;
           this.$store.commit('closeModal');
           this.$store.commit('triggerReInitFlag');
           this.$store.commit('triggerActionsMessage', actionMessage)
-        });
+        })
+        .catch((error) => {
+          this.isSending = false;
+          console.log(error);
+          this.apiErrors = 'Something went wrong. Please try again';
+        })
       }
       
     }
@@ -275,5 +303,11 @@ export default {
   .form-input-legend {
     font-size: 14px;
     color: var(--color-secondary);
+  }
+
+  .api-error {
+    color: var(--color-error);
+    line-height: 36px;
+    font-size: 14px;
   }
 </style>
