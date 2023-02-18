@@ -32,7 +32,8 @@ export default {
   --color-bg-secondary: #8D8741;
   --color-scrollbar: rgba(0, 0, 0, 0.07);
   --color-error: #ff3333;
-  --main-transition: 0.2s;
+  --main-transition: 0.2s ease;
+  --mid-transition: 0.4s ease;
   --main-shadow: 0 0 4px rgb(0 0 0 / 10%), 0 4px 12px rgb(0 0 0 / 10%);
 }
 

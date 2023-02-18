@@ -1,7 +1,9 @@
 <template>
   <div class="show-card-cover">
     <div class="show-card-content">
-      <img :src="cardImageUri" />
+      <Transition name="flip" :css="isInit">
+        <img :key="cardImageUri" :src="cardImageUri" />
+      </Transition>
     </div>
     <button 
       class="show-card-side" 
@@ -25,10 +27,16 @@ export default {
   data() {
     return {
       isInit: false,
-      cardImageUri: null
+      cardImageUri: null,
     }
   },
   methods: {
+    init() {
+      this.cardImageUri = this.imageUri;
+      this.$nextTick(() => {
+        this.isInit = true;
+      })
+    },
     switchCardSide() {
       let number = this.modalPayload.indexOf(this.cardImageUri) === 0 ? 1 : 0;
       this.cardImageUri = this.modalPayload[number];
@@ -49,18 +57,22 @@ export default {
     }
   },
   mounted() {
-    this.cardImageUri = this.imageUri;
+    this.init();
   }
 }
 </script>
 
 <style lang="less" scoped>
   .show-card-content {
+    min-height: 420px;
+    text-align: center;
+
     img {
       max-height: 420px;
       margin: 0 auto;
-      display: block;
       border-radius: 16px;
+      will-change: transform;
+      transform-style: preserve-3d;
     }
   }
 
@@ -94,4 +106,18 @@ export default {
       }
     }
   }
+
+  .flip-enter-active {
+    transition: var(--mid-transition);
+  }
+  
+  .flip-leave-active {
+    display: none;
+  }
+
+  .flip-enter-from, .flip-leave-to {
+    transform: rotateY(180deg);
+    opacity: 0;
+  }
+
 </style>
