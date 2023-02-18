@@ -52,9 +52,10 @@
           </div>
         </div>
         <div class="swapp-segment">
-          <div class="swapp-segment-bg swapp-segment-bg-right" 
-            v-if="item.deckOut" 
-            :style="{ backgroundImage: `url('${getUris(item.deckOut).image_uris?.art_crop})` }"
+          <div class="swapp-segment-bg swapp-segment-bg-right"  
+            :style="{ backgroundImage: item.deckOut ? 
+                      `url(${getUris(item.deckOut).image_uris?.art_crop})` : 
+                      `url(${require('@/assets/images/warehouse.jpg')})` }"
           ></div>
           <button 
             class="swapp-input" 
