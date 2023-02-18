@@ -30,21 +30,21 @@
           ></div>
           <button 
             class="swapp-input"
-            @click="openShowCardModal(getUris(item.deckIn).image_uris?.normal)"
+            @click="openShowCardModal(getUrisForModal(item.deckIn))"
           >{{ item.deckIn.name }}</button>
         </div>
         <div class="swapp-segment swapp-item-mid">
           <div class="swapp-item-mid-cover">
             <button 
               class="swapp-item-image swapp-item-image-left"
-              @click="openShowCardModal(getUris(item.cardIn).image_uris?.normal)"
+              @click="openShowCardModal(getUrisForModal(item.cardIn))"
             >
               <img :src="item.cardIn ? getUris(item.cardIn).image_uris?.normal : require('@/assets/images/card_back.jpg')">
             </button>
             <button 
               class="swapp-item-image swapp-item-image-right"
               :class="{ disabled : !item.cardOut }"
-              @click="openShowCardModal(getUris(item.cardOut).image_uris?.normal)"
+              @click="openShowCardModal(getUrisForModal(item.cardOut))"
               :disabled="!item.cardOut"
             >
               <img :src="item.cardOut ? getUris(item.cardOut).image_uris?.normal : require('@/assets/images/card_back.jpg')">
@@ -59,7 +59,7 @@
           <button 
             class="swapp-input" 
             v-if="item.deckOut"
-            @click="openShowCardModal(getUris(item.deckOut).image_uris?.normal)"
+            @click="openShowCardModal(getUrisForModal(item.deckOut))"
           >{{ item.deckOut.name }}</button>
         </div>
       </div> 
@@ -135,6 +135,16 @@ export default {
     },
     getUris(path) {
       return (path.card_faces && !path.image_uris) ? path.card_faces[0] : path;
+    },
+    getUrisForModal(path) {
+      if (path.image_uris) {
+        return path.image_uris.normal
+      }
+      let uris = [];
+      path.card_faces.forEach(item => {
+        uris.push(item.image_uris.normal)
+      })
+      return uris
     },
     openEditModal(id) {
       this.$store.commit('updateOpenModal', { modalName: 'CreateEditModal', swappId: id });
