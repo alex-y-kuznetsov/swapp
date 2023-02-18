@@ -286,6 +286,7 @@ export default {
 
     .swapp-item-controls {
       align-items: center;
+      justify-content: center;
     }
 
     svg {
