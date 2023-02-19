@@ -418,4 +418,36 @@ export default {
       }
     }
   }
+
+  @media (max-width: 576px) {
+    .swapp-item-head {
+      grid-template-columns: 30% auto 30% ;
+
+      .swapp-item-controls {
+        display: none;
+      }
+    }
+
+    .swapp-item {
+      gap: 0 4px;
+    }
+
+    .swapp-item-cover {
+      grid-template-columns: auto;
+    }
+
+    .swapp-item-mid-cover {
+      height: 80px;
+    }
+
+    .swapp-input {
+      font-size: 16px;
+    }
+
+    .swapp-item-controls {
+      flex-direction: row;
+      justify-content: flex-end;
+      margin-top: 4px;
+    }
+  }
 </stype>

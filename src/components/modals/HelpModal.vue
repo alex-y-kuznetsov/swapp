@@ -29,4 +29,10 @@ export default {
       padding: 8px 0;
     }
   }
+
+  @media (max-width: 576px) {
+    .swapp-list {
+      padding-left: 16px;
+    }
+  }
 </style>

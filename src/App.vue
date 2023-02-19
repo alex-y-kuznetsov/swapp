@@ -23,6 +23,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
+  //colors
   --color-white: #e0e0e0;
   --color-main: #FFFFFF;
   --color-secondary: #FBEEC1;
@@ -32,9 +33,14 @@ export default {
   --color-bg-secondary: #8D8741;
   --color-scrollbar: rgba(0, 0, 0, 0.07);
   --color-error: #ff3333;
+
+  //general
   --main-transition: 0.2s ease;
   --mid-transition: 0.4s ease;
   --main-shadow: 0 0 4px rgb(0 0 0 / 10%), 0 4px 12px rgb(0 0 0 / 10%);
+
+  //media breakpoints
+  --media-small: 576px;
 }
 
 html,

@@ -310,4 +310,10 @@ export default {
     line-height: 36px;
     font-size: 14px;
   }
+
+  @media (max-width: 576px) {
+    .api-error {
+      line-height: 16px;
+    }
+  }
 </style>

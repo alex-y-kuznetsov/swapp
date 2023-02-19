@@ -74,8 +74,8 @@ export default {
     background-color: var(--color-bg);
     box-shadow: var(--main-shadow);
     border-radius: 4px;
-    padding: 32px 24px;
-    margin: 24px 12px;
+    padding: 40px 24px;
+    margin: 14px 12px;
     width: calc(100% - 24px);
     box-sizing: border-box;
     position: relative;
