@@ -23,6 +23,7 @@
 <script>
 import CreateEditModal from '@/components/modals/CreateEditModal.vue';
 import ConfirmRemoveModal from '@/components/modals/ConfirmRemoveModal.vue';
+import EmergencyModal from '@/components/modals/EmergencyModal.vue';
 import ShowCardModal from '@/components/modals/ShowCardModal.vue';
 import HelpModal from '@/components/modals/HelpModal.vue';
 import IconCross from '@/components/icons/IconCross.vue';
@@ -32,6 +33,7 @@ export default {
   components: {
     CreateEditModal,
     ConfirmRemoveModal,
+    EmergencyModal,
     ShowCardModal,
     HelpModal,
     IconCross

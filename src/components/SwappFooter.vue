@@ -16,7 +16,14 @@
         :disabled="!this.tableLength"
       >Clear</button>
     </div>
-    <div class="footer-copyright">{{  getYear() }}</div>
+    <div class="footer-copyright">
+      <button 
+        class="emergency"
+        tabindex="-1"
+        @click="showEmergencyModal"
+      >.</button>
+      {{  getYear() }}
+    </div>
   </div>
 </template>
   
@@ -34,6 +41,9 @@ export default {
     },
     showConfirmRemoveModal() {
       this.$store.commit('updateOpenModal', { modalName: 'ConfirmRemoveModal' });
+    },
+    showEmergencyModal() {
+      this.$store.commit('updateOpenModal', { modalName: 'EmergencyModal' });
     },
     getYear() {
       const today = new Date();
@@ -80,6 +90,14 @@ export default {
       background-color: var(--color-bg);
       transition: all var(--main-transition);
     }
+  }
+
+  .emergency {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    color: var(--color-secondary);
   }
 
   .footer-copyright {

@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <SwappNoData v-if="!swappList.length" />
+  <SwappNoData v-if="!swappList.length && isInit"/>
 
   <SwappLoader v-if="!isInit" />
 
