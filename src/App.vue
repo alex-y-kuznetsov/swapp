@@ -38,9 +38,6 @@ export default {
   --main-transition: 0.2s ease;
   --mid-transition: 0.4s ease;
   --main-shadow: 0 0 4px rgb(0 0 0 / 10%), 0 4px 12px rgb(0 0 0 / 10%);
-
-  //media breakpoints
-  --media-small: 576px;
 }
 
 html,
