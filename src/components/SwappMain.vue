@@ -155,7 +155,7 @@ export default {
     },
     deleteSwappItem(id) {
       localStorageHelper.removeFromStorage(id);
-      const itemToRemove = this.swappList.find(item => item.id === id);
+      const itemToRemove = this.swappList.findIndex(item => item.id === id);
       this.swappList.splice(itemToRemove, 1);
       this.$store.commit('setTableLength', this.swappList.length);
       this.$store.commit('triggerActionsMessage', 'Swap removed')
