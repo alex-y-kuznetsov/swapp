@@ -182,7 +182,7 @@ export default {
       }
     },
     generateSwappId() {
-      return String(Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '');
+      return 'swapp-' + String(Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '');
     },
     validateRequiredFields() {
       this.validationErrors = [];

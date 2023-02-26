@@ -14,7 +14,7 @@ export default {
   methods: {
     clearAllSwapps() {
       for (let key in localStorage) {
-        if (key !== 'cardNames') {
+        if (key.startsWith('swapp-')) {
           localStorageHelper.removeFromStorage(key); 
         }
       }

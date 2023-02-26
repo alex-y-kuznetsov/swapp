@@ -121,13 +121,14 @@ export default {
     init() {
       this.swappList = [];
       let tempList = cloneObject(localStorage);
-      delete tempList.cardNames;
 
       for (const item in tempList) {
-        this.swappList.push({
-          id: item,
-          ...JSON.parse(tempList[item]).value
-        })
+        if (item.startsWith('swapp-')) {
+          this.swappList.push({
+            id: item,
+            ...JSON.parse(tempList[item]).value
+          })
+        }
       }
       
       this.swappList.sort((a, b) => a.created - b.created).reverse();
